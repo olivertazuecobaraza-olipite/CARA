@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "114492655394",
+    "project_id": "concesionariokt",
+    "storage_bucket": "concesionariokt.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:114492655394:android:76332ac71690736833077b",
+        "android_client_info": {
+          "package_name": "oliver.concesionario"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDYGmlfa3j9JbAIMdm99cebBHPl64rJ6EM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
