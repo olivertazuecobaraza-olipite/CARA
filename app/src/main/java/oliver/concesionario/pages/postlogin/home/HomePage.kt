@@ -64,15 +64,15 @@ fun HomeScreen(
             // List coches
             LeftCard(Car(
                 "Ferrari f40",
-                "Deportivo",
+                "Sport",
                 "123123$",
             )) { navToDetailCar(it) }
 
-            Spacer(Modifier.width(3.dp))
+            Spacer(Modifier.padding(5.dp))
 
             RightCard(Car(
                 "Ferrari f40",
-                "Deportivo",
+                "Sport",
                 "123123$")) { navToDetailCar(it) }
         }
 
@@ -161,19 +161,19 @@ fun LeftCard(car: Car,
                 verticalArrangement = Arrangement.Center)
             {
                 Text(
-                    text = car.name, // "TESU Rodiel"
+                    text = car.name,
                     fontWeight = FontWeight.Bold,
                     fontSize = 18.sp,
                     color = Color.Black
                 )
                 Text(
-                    text = car.type, // "Electric Sedan"
+                    text = car.type,
                     fontSize = 14.sp,
                     color = Color.Gray
                 )
                 Spacer(modifier = Modifier.height(4.dp))
                 Text(
-                    text = "$${car.price}", // "$7309,00"
+                    text = "${car.price}$",
                     fontWeight = FontWeight.Medium,
                     fontSize = 16.sp,
                     color = Color.LightGray
@@ -240,19 +240,19 @@ fun RightCard(car: Car,
                 verticalArrangement = Arrangement.Center)
             {
                 Text(
-                    text = car.name, // "TESU Rodiel"
+                    text = car.name,
                     fontWeight = FontWeight.Bold,
                     fontSize = 18.sp,
                     color = Color.Black
                 )
                 Text(
-                    text = car.type, // "Electric Sedan"
+                    text = car.type,
                     fontSize = 14.sp,
                     color = Color.Gray
                 )
                 Spacer(modifier = Modifier.height(4.dp))
                 Text(
-                    text = "$${car.price}", // "$7309,00"
+                    text = "${car.price}$",
                     fontWeight = FontWeight.Medium,
                     fontSize = 16.sp,
                     color = Color.LightGray
