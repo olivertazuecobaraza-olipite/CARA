@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
@@ -59,21 +60,33 @@ fun HomeScreen(
             TitleRow(navToProfile)
             Spacer(Modifier.height(15.dp))
             SearchField(busqueda) { }
-            Spacer(Modifier.height(15.dp))
+            //Spacer(Modifier.height(5.dp))
 
-            // List coches
-            LeftCard(Car(
-                "Ferrari f40",
-                "Sport",
-                "123123$",
-            )) { navToDetailCar(it) }
 
-            Spacer(Modifier.padding(5.dp))
+            LazyColumn(modifier = Modifier.padding(15.dp)) {
+                items(30){ i ->
+                    if (i%2==0){
+                        // List coches
+                        LeftCard(Car(
+                            "Ferrari f40",
+                            "Sport",
+                            "123123$",
+                        )) { navToDetailCar(it) }
+                        Spacer(Modifier.padding(5.dp))
+                    } else {
+                        RightCard(Car(
+                            "Ferrari f40",
+                            "Sport",
+                            "123123$")) { navToDetailCar(it) }
+                        Spacer(Modifier.padding(5.dp))
+                    }
+                }
+            }
 
-            RightCard(Car(
-                "Ferrari f40",
-                "Sport",
-                "123123$")) { navToDetailCar(it) }
+
+
+
+
         }
 
     }
