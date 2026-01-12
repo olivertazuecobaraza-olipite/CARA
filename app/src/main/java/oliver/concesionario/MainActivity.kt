@@ -34,7 +34,7 @@ class MainActivity : ComponentActivity() {
                     InitViewModel(),
                     LoginViewModel(auth),
                     RegisterViewModel(auth),
-                    auth
+
                 )
             }
         }

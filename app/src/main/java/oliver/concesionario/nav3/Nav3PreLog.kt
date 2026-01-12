@@ -7,6 +7,7 @@ import androidx.compose.runtime.remember
 import androidx.navigation3.runtime.NavEntry
 import androidx.navigation3.ui.NavDisplay
 import com.google.firebase.auth.FirebaseAuth
+import oliver.concesionario.model.Car
 import oliver.concesionario.pages.postlogin.home.HomeScreen
 import oliver.concesionario.pages.postlogin.info.InfoCarScreen
 import oliver.concesionario.pages.postlogin.profile.ProfileScreen
@@ -28,17 +29,17 @@ data object HomeScreen_O
 data object ProfileScreen_O
 
 data class InfoCarScreen_C(
-    val id: String
+    val car: Car
 )
 
 
 @Composable
 fun Navigation(
     isUserLoggin: Boolean,
+
     initViewModel: InitViewModel,
     loginViewModel: LoginViewModel,
-    registerViewModel: RegisterViewModel,
-    auth: FirebaseAuth
+    registerViewModel: RegisterViewModel
 
 ){
     val startingScreen = if (isUserLoggin) HomeScreen_O else InitScreen_O
@@ -102,12 +103,21 @@ fun Navigation(
                 // Post Login
                 is HomeScreen_O -> NavEntry(key) {
                     HomeScreen(
-                        auth,
                         navToInit = {
                             backStack.add(InitScreen_O)
+                        },
+                        navToProfile = {
+                            backStack.add(ProfileScreen_O)
+                        },
+                        navToDetailCar = { car ->
+                            backStack.add(InfoCarScreen_C(car))
                         }
+                    )
+                }
 
-
+                is InfoCarScreen_C -> NavEntry(key) {
+                    InfoCarScreen(
+                        key.car
                     )
                 }
 
@@ -115,9 +125,7 @@ fun Navigation(
                     ProfileScreen()
                 }
 
-                is InfoCarScreen_C -> NavEntry(key) {
-                    InfoCarScreen(key.id)
-                }
+
                 // Error
                 else -> NavEntry(key = Unit) {
                     Text("Error runing")

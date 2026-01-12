@@ -215,8 +215,7 @@ private fun PasswordField(password: String,
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = 20.dp)
-            .border(1.dp, Color.LightGray, shape = RoundedCornerShape(10.dp))
-            ,
+            .border(1.dp, Color.LightGray, shape = RoundedCornerShape(10.dp)),
         placeholder = { Text("Password") },
         value = password,
         onValueChange = { onPasswordFieldChange(it) },
