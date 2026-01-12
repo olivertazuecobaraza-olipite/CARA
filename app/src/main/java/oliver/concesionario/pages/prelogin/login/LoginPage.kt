@@ -81,13 +81,13 @@ fun LoginScreen(
                 loginViewModel.ResetEmailPassw()
                 navToback()
             }
-            Spacer(Modifier.padding(25.dp))
+            Spacer(Modifier.padding(15.dp))
 
             LogoImage()
-            Spacer(Modifier.padding(25.dp))
+            Spacer(Modifier.padding(15.dp))
             Texts()
 
-            Spacer(Modifier.padding(25.dp))
+            Spacer(Modifier.padding(15.dp))
             EmailPassFields(
                 email,
                 password,
@@ -138,7 +138,7 @@ fun BackArrow(navToBack: () -> Unit){
 fun LogoImage(){
     Image(painter = painterResource(R.drawable.ic_logo_cara),
         contentDescription = "",
-        modifier = Modifier.clip(CircleShape),
+        modifier = Modifier.clip(CircleShape).size(150.dp),
         contentScale = ContentScale.Crop)
 }
 
@@ -317,8 +317,6 @@ private fun GoogleIcon(){
                 .background(Color.White, shape = CircleShape)
                 .shadow(elevation = 2.dp, shape = CircleShape)
         )
-        Spacer(Modifier.padding(2.dp))
-        Text(text = "Log in with Google", fontSize = 12.sp)
     }
 
 }
@@ -327,8 +325,7 @@ private fun GoogleIcon(){
 @Composable
 private fun AppleIcon(){
 
-    Column(horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.SpaceBetween) {
+    Column(horizontalAlignment = Alignment.CenterHorizontally) {
         Image(painter = painterResource(R.drawable.ic_apple_logo),
         contentDescription = "",
         modifier = Modifier
@@ -336,8 +333,7 @@ private fun AppleIcon(){
             .background(Color.White, shape = CircleShape)
             .shadow(elevation = 2.dp, shape = CircleShape)
     )
-        Spacer(Modifier.padding(2.dp))
-        Text(text = "Log in with Apple", fontSize = 12.sp) }
+         }
 }
 
 // Register

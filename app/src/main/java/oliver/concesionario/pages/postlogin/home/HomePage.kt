@@ -45,7 +45,6 @@ import oliver.concesionario.model.Car
 @Preview
 @Composable
 fun HomeScreen(
-                navToInit: () -> Unit = {},
                 navToProfile: () -> Unit = {},
                 navToDetailCar: (Car) -> Unit = {})
 {
@@ -53,17 +52,24 @@ fun HomeScreen(
     Scaffold(containerColor = Color(0xffE2E3E3),
             modifier = Modifier.fillMaxSize()) { paddingValues ->
         Column(modifier = Modifier
-            .padding(paddingValues = paddingValues)
+            .padding(
+                start = 0.dp,
+                end = 0.dp,
+                top = 0.dp, // 🔥 CLAVE
+                bottom = paddingValues.calculateBottomPadding()
+            )
             .fillMaxWidth())
         {
 
             TitleRow(navToProfile)
-            Spacer(Modifier.height(15.dp))
-            SearchField(busqueda) { }
-            //Spacer(Modifier.height(5.dp))
 
 
             LazyColumn(modifier = Modifier.padding(15.dp)) {
+                items(1){
+                    SearchField(busqueda) { }
+                }
+                item { Spacer(Modifier.padding(5.dp)) }
+
                 items(30){ i ->
                     if (i%2==0){
                         // List coches
@@ -104,13 +110,13 @@ fun TitleRow(navToProfile: () -> Unit){
        )
     {
         Text(text = "CATALOG",
-            fontSize = 32.sp,
+            fontSize = 30.sp,
             fontWeight = FontWeight.Bold)
         IconButton (onClick = { navToProfile() })
         {
             Icon(painter = painterResource(R.drawable.account_circle_24px),
                 contentDescription = "",
-                tint = Color.Gray)
+                tint = Color.Black)
         }
     }
 }

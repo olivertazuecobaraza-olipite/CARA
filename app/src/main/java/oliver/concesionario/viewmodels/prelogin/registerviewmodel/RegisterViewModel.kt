@@ -36,15 +36,19 @@ class RegisterViewModel(val auth: FirebaseAuth) {
         val eml: String = _email.value as String
         val psw: String = _password.value as String
 
-        auth.createUserWithEmailAndPassword(eml, psw)
-            .addOnCompleteListener { task ->
-            if (task.isSuccessful){
-                _isRegisterSuccesfully.value = true
-                ResetVariables()
-            } else {
-                ResetVariables()
-            }
+        if (eml.isNotEmpty() && psw.isNotEmpty()){
+            auth.createUserWithEmailAndPassword(eml, psw)
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful){
+                        _isRegisterSuccesfully.value = true
+                        ResetVariables()
+                    } else {
+                        _isRegisterSuccesfully.value = false
+                        ResetVariables()
+                    }
+                }
         }
+
 
     }
 
