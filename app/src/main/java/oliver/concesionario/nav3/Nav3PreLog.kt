@@ -14,6 +14,7 @@ import androidx.navigation3.runtime.NavEntry
 import androidx.navigation3.ui.NavDisplay
 import com.google.firebase.auth.FirebaseAuth
 import oliver.concesionario.model.Car
+import oliver.concesionario.pages.postlogin.garage.GarageScreen
 import oliver.concesionario.pages.postlogin.home.HomeScreen
 import oliver.concesionario.pages.postlogin.info.InfoCarScreen
 import oliver.concesionario.pages.postlogin.profile.ProfileScreen
@@ -145,7 +146,22 @@ fun Navigation(
                     }
 
                     is GarageScreen_O -> NavEntry(key){
-
+                        GarageScreen(
+                            listCars = listOf(Car(name = "NOMBRE", type = "Sport", price = "price"),
+                                Car(name = "NOMBRE", type = "Sport", price = "price"),
+                                Car(name = "NOMBRE", type = "Sport", price = "price"),
+                                Car(name = "NOMBRE", type = "Sport", price = "price"),
+                                Car(name = "NOMBRE", type = "Sport", price = "price"),
+                                Car(name = "NOMBRE", type = "Sport", price = "price"),
+                                Car(name = "NOMBRE", type = "Sport", price = "price"),
+                                Car(name = "NOMBRE", type = "Sport", price = "price"),
+                                Car(name = "NOMBRE", type = "Sport", price = "price"),
+                                Car(name = "NOMBRE", type = "Sport", price = "price"),
+                                Car(name = "NOMBRE", type = "Sport", price = "price")),
+                            navToDetailCar = { car ->
+                                backStack.add(InfoCarScreen_C(car))
+                            }
+                        )
                     }
 
                     is ProfileScreen_O -> NavEntry(key) {
@@ -170,8 +186,7 @@ fun Navigation(
                         InfoCarScreen(
                             car = key.car,
                             goBack = {
-                                backStack.clear()
-                                backStack.add(HomeScreen_O)
+                                backStack.removeLastOrNull()
                             }
                         )
 

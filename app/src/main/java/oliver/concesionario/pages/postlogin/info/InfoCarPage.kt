@@ -104,7 +104,9 @@ private fun InfoContent(car: Car){
 
         ) {
             Column(modifier = Modifier.padding(24.dp)) {
-
+                HorizontalDivider(modifier = Modifier.padding(vertical = 5.dp, horizontal = 150.dp),
+                    thickness = 3.dp,
+                    color = Color.Gray)
                 NameTypeText(car)
 
                 // Line spacer
