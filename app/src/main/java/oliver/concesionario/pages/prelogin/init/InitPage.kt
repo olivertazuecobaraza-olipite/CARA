@@ -64,7 +64,7 @@ fun InitScreen(initViewModel: InitViewModel,
 
 // Image Logo
 @Composable
-fun LogoImage(){
+private fun LogoImage(){
     Image(painter = painterResource(R.drawable.ic_logo_cara),
         contentDescription = "",
         modifier = Modifier.clip(CircleShape),
@@ -73,14 +73,14 @@ fun LogoImage(){
 
 // Text Name...
 @Composable
-fun Texts(){
+private fun Texts(){
     Text(text = "CARA", fontSize = 48.sp, fontWeight = FontWeight.Bold)
     Text(text = "Your journey starts here", fontSize = 22.sp)
 }
 
 // Botones
 @Composable
-fun AuthBottons(navToLogin: () -> Unit, navToRegister: () -> Unit){
+private fun AuthBottons(navToLogin: () -> Unit, navToRegister: () -> Unit){
     Row(
         modifier = Modifier.fillMaxWidth().padding(horizontal = 25.dp),
         horizontalArrangement = Arrangement.Center,

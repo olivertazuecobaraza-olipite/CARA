@@ -109,7 +109,7 @@ fun HomeScreen(
 
 // Title Row
 @Composable
-fun TitleRow(navToProfile: () -> Unit){
+private fun TitleRow(navToProfile: () -> Unit){
     Row(modifier = Modifier
             .padding(horizontal = 15.dp, vertical = 5.dp)
             .fillMaxWidth(),
@@ -131,7 +131,7 @@ fun TitleRow(navToProfile: () -> Unit){
 
 // Search a car Field
 @Composable
-fun SearchField(busqueda: String,
+private fun SearchField(busqueda: String,
                 onBusquedaChange: (String) -> Unit){
     TextField(
         value = busqueda,
@@ -164,7 +164,7 @@ fun SearchField(busqueda: String,
 }
 // Left car Card
 @Composable
-fun LeftCard(car: Car,
+private fun LeftCard(car: Car,
              navToDetailCar :(Car) -> Unit
 ){
     Card(modifier = Modifier
@@ -228,7 +228,7 @@ fun LeftCard(car: Car,
 
 // RighCard
 @Composable
-fun RightCard(car: Car,
+private fun RightCard(car: Car,
              navToDetailCar :(Car) -> Unit
 ){
     Card(modifier = Modifier

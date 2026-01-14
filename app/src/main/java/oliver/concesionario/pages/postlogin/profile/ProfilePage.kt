@@ -65,7 +65,7 @@ fun ProfileScreen(auth : FirebaseAuth,
 }
 
 @Composable
-fun Title(){
+private fun Title(){
     Text(text = "PROFILE",
         fontSize = 30.sp,
         fontWeight = FontWeight.Bold,
@@ -75,7 +75,7 @@ fun Title(){
 }
 
 @Composable
-fun ProfileImage(){
+private fun ProfileImage(){
     Image(painter = painterResource(R.drawable.android_24px),
         contentDescription = "",
         modifier = Modifier
@@ -88,7 +88,7 @@ fun ProfileImage(){
 }
 
 @Composable
-fun NombreEmail(name: String?, email: String?){
+private fun NombreEmail(name: String?, email: String?){
     //Name
     if (name != null){
         Text(text = name, fontWeight = FontWeight.Bold, fontSize = 34.sp)
@@ -102,7 +102,7 @@ fun NombreEmail(name: String?, email: String?){
 }
 
 @Composable
-fun SettingsCard(navToSettings: () -> Unit){
+private fun SettingsCard(navToSettings: () -> Unit){
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -137,7 +137,7 @@ fun SettingsCard(navToSettings: () -> Unit){
 }
 
 @Composable
-fun LogOutButton(cerraSesion:() -> Unit,
+private fun LogOutButton(cerraSesion:() -> Unit,
                  navToInit: () -> Unit){
 
     Row(modifier = Modifier

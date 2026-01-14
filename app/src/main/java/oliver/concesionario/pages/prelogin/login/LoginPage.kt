@@ -119,7 +119,7 @@ fun LoginScreen(
 }
 // Back Arrow
 @Composable
-fun BackArrow(navToBack: () -> Unit){
+private fun BackArrow(navToBack: () -> Unit){
     Row(modifier = Modifier
         .fillMaxWidth()
         .padding(horizontal = 20.dp))
@@ -135,7 +135,7 @@ fun BackArrow(navToBack: () -> Unit){
 
 // Image Logo
 @Composable
-fun LogoImage(){
+private fun LogoImage(){
     Image(painter = painterResource(R.drawable.ic_logo_cara),
         contentDescription = "",
         modifier = Modifier.clip(CircleShape).size(150.dp),
@@ -144,7 +144,7 @@ fun LogoImage(){
 
 // Text Welcome...
 @Composable
-fun Texts(){
+private fun Texts(){
     Text(text = "WELCOME", fontSize = 42.sp, fontWeight = FontWeight.Bold)
     Text(text = "Sign in to continue", fontSize = 18.sp)
 }
@@ -152,7 +152,7 @@ fun Texts(){
 
 // Writeables
 @Composable
-fun EmailPassFields(
+private fun EmailPassFields(
     email: String,
     password: String,
 
@@ -254,7 +254,7 @@ private fun PasswordField(password: String,
 
 // Log In Button
 @Composable
-fun LoginButton(onLogClic: () -> Unit){
+private fun LoginButton(onLogClic: () -> Unit){
 
     val gradiant = Brush.verticalGradient(
         listOf(Color(0xff8ECAFE), Color(0xff4A90E2))
@@ -282,7 +282,7 @@ fun LoginButton(onLogClic: () -> Unit){
 
 // Forgot password
 @Composable
-fun ForgotPassword(onForgotPassword: () -> Unit){
+private fun ForgotPassword(onForgotPassword: () -> Unit){
     Text(text = "Forgot your password?",
         color = Color.DarkGray,
         modifier = Modifier.clickable(onClick = { onForgotPassword() }))
@@ -290,7 +290,7 @@ fun ForgotPassword(onForgotPassword: () -> Unit){
 
 // Google Apple Logos
 @Composable
-fun OtherLogsIcons(){
+private fun OtherLogsIcons(){
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -338,7 +338,7 @@ private fun AppleIcon(){
 
 // Register
 @Composable
-fun SignUp(onSignUpClic: () -> Unit){
+private fun SignUp(onSignUpClic: () -> Unit){
     Row(modifier = Modifier
             .fillMaxWidth()
             .fillMaxHeight()

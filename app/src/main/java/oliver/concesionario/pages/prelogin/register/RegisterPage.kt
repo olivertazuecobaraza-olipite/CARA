@@ -106,7 +106,7 @@ fun RegisterScreen(registerViewModel: RegisterViewModel,
 
 // Back Arrow
 @Composable
-fun BackArrow(navToBack: () -> Unit){
+private fun BackArrow(navToBack: () -> Unit){
     Row(modifier = Modifier
         .fillMaxWidth()
         .padding(horizontal = 20.dp))
@@ -123,7 +123,7 @@ fun BackArrow(navToBack: () -> Unit){
 
 // Image Logo
 @Composable
-fun LogoImage(){
+private fun LogoImage(){
     Image(painter = painterResource(R.drawable.ic_logo_cara),
         contentDescription = "",
         modifier = Modifier.clip(CircleShape).size(150.dp),
@@ -132,14 +132,14 @@ fun LogoImage(){
 
 // Text Welcome...
 @Composable
-fun Texts(){
+private fun Texts(){
     Text(text = "Create an Account", fontSize = 32.sp, fontWeight = FontWeight.Bold)
 }
 
 
 // Writeables
 @Composable
-fun EmailPassFields(email: String,
+private fun EmailPassFields(email: String,
                     password: String,
 
                     onEmailFieldChange: (String) -> Unit,
@@ -234,7 +234,7 @@ private fun PasswordField(password: String,
 
 // Log In Button
 @Composable
-fun RegisterButton(email: String,
+private fun RegisterButton(email: String,
                    password: String,
                    onRegClic: () -> Unit ){
 
@@ -265,7 +265,7 @@ fun RegisterButton(email: String,
 
 // Google Apple Logos
 @Composable
-fun OtherLogsIcons(){
+private fun OtherLogsIcons(){
     Row(
         modifier = Modifier
             .fillMaxWidth()

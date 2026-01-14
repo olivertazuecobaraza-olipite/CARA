@@ -76,7 +76,7 @@ fun InfoCarScreen(car: Car,
 }
 
 @Composable
-fun CarImage(image: Int){
+private fun CarImage(image: Int){
     Image(painter = painterResource(image),
         contentDescription = null,
         modifier = Modifier
@@ -86,7 +86,7 @@ fun CarImage(image: Int){
 }
 
 @Composable
-fun InfoContent(car: Car){
+private fun InfoContent(car: Car){
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -139,7 +139,7 @@ fun InfoContent(car: Car){
 }
 
 @Composable
-fun NameTypeText(car:Car){
+private fun NameTypeText(car:Car){
     // Title
     Text(
         text = car.name,
@@ -153,7 +153,7 @@ fun NameTypeText(car:Car){
 }
 
 @Composable
-fun StatsCar(car: Car){
+private fun StatsCar(car: Car){
     // Km stats
     Column(modifier = Modifier.fillMaxWidth()) {
         Row(modifier = Modifier.fillMaxWidth(),
@@ -176,7 +176,7 @@ fun StatsCar(car: Car){
 }
 
 @Composable
-fun CarColorSelector() {
+private fun CarColorSelector() {
     // 1. Definimos el estado para saber qué índice está seleccionado (por defecto el 0)
     var selectedIndex by remember { mutableStateOf(0) }
 
@@ -207,7 +207,7 @@ fun CarColorSelector() {
 }
 
 @Composable
-fun CarCircle(
+private fun CarCircle(
     imageRes: Int,
     isSelected: Boolean,
     onClick: () -> Unit, // 3. Añadimos un callback para el clic
@@ -242,14 +242,14 @@ fun CarCircle(
 }
 
 @Composable
-fun DescriptionCar(car: Car){
+private fun DescriptionCar(car: Car){
     Text(
         text = car.description,
     )
 }
 
 @Composable
-fun AddGarageButton(addGarage:() -> Unit){
+private fun AddGarageButton(addGarage:() -> Unit){
     Row(modifier = Modifier
         .fillMaxWidth()
         .background(Color.White),
