@@ -1,5 +1,6 @@
 package oliver.concesionario.viewmodels.prelogin.registerviewmodel
 
+import android.util.Patterns
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.FirebaseAuth
@@ -34,17 +35,19 @@ class RegisterViewModel(val auth: FirebaseAuth) {
     // clicl on register
     fun OnRegisterSelected() {
         Email.value?.let { email ->
-            Password.value?.let { password ->
-                auth.createUserWithEmailAndPassword(email, password)
-                    .addOnCompleteListener { task ->
-                        if (task.isSuccessful){
-                            ResetVariables()
-                            _isRegisterSuccesfully.value = true
-                        } else {
-                            ResetVariables()
-                            _isRegisterSuccesfully.value = false
+            if (CheckEmail(email)){
+                Password.value?.let { password ->
+                    auth.createUserWithEmailAndPassword(email, password)
+                        .addOnCompleteListener { task ->
+                            if (task.isSuccessful){
+                                ResetVariables()
+                                _isRegisterSuccesfully.value = true
+                            } else {
+                                ResetVariables()
+                                _isRegisterSuccesfully.value = false
+                            }
                         }
-                    }
+                }
             }
         }
 
@@ -60,6 +63,11 @@ class RegisterViewModel(val auth: FirebaseAuth) {
     fun ResetVariables(){
         _email.value = ""
         _password.value = ""
+    }
+
+    // Check email
+    private fun CheckEmail(email: String): Boolean{
+        return Patterns.EMAIL_ADDRESS.matcher(email).matches()
     }
 
 }
