@@ -39,7 +39,8 @@ class MainActivity : ComponentActivity() {
         setContent {
             ConcesionarioTheme {
 
-                Navigation(isLogg,
+                Navigation(auth = auth,
+                    isUserLoggin = isLogg,
                     InitViewModel(),
                     LoginViewModel(auth),
                     RegisterViewModel(auth),

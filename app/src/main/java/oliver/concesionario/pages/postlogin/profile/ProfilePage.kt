@@ -30,15 +30,15 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.google.firebase.auth.FirebaseAuth
 import oliver.concesionario.R
 import oliver.concesionario.viewmodels.postlogin.profileviewmodel.ProfileViewModel
 
 
 @Composable
-fun ProfileScreen(
+fun ProfileScreen(auth : FirebaseAuth,
     navToSettings: () -> Unit,
     navToInit: () -> Unit,
     profileViewModel: ProfileViewModel
@@ -48,8 +48,11 @@ fun ProfileScreen(
         Column(modifier = Modifier.padding(paddingValues).fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally) {
             Title()
+            Spacer(Modifier.padding(10.dp))
             ProfileImage()
-            NombreEmail("Nombre", "Correo")
+            Spacer(Modifier.padding(5.dp))
+            NombreEmail(auth.currentUser?.email?.split("@")[0], auth.currentUser?.email)
+            Spacer(Modifier.padding(15.dp))
             SettingsCard(navToSettings)
             Spacer(modifier = Modifier.weight(1f))
             LogOutButton(
@@ -85,10 +88,17 @@ fun ProfileImage(){
 }
 
 @Composable
-fun NombreEmail(name: String, email: String){
+fun NombreEmail(name: String?, email: String?){
     //Name
-    Text(text = name, fontWeight = FontWeight.Bold, fontSize = 34.sp)
-    Text(text = email, fontSize = 16.sp)
+    if (name != null){
+        Text(text = name, fontWeight = FontWeight.Bold, fontSize = 34.sp)
+    } else {
+        Text(text = "null name", fontWeight = FontWeight.Bold, fontSize = 34.sp)
+    }
+
+    if (email != null) {
+        Text(text = email, fontSize = 16.sp)
+    }
 }
 
 @Composable

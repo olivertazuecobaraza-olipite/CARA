@@ -74,16 +74,17 @@ fun HomeScreen(
                     if (i%2==0){
                         // List coches
                         LeftCard(Car(
-                            "Ferrari f40",
-                            "Sport",
-                            "123123$",
+                            name = "Ferrari f40",
+                            type = "Sport",
+                            price ="123123$"
                         )) { navToDetailCar(it) }
                         Spacer(Modifier.padding(5.dp))
                     } else {
                         RightCard(Car(
-                            "Ferrari f40",
-                            "Sport",
-                            "123123$")) { navToDetailCar(it) }
+                            name = "Ferrari f40",
+                            type = "Sport",
+                            price = "123123$")
+                        ) { navToDetailCar(it) }
                         Spacer(Modifier.padding(5.dp))
                     }
                 }

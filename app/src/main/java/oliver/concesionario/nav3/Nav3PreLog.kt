@@ -48,6 +48,7 @@ val bottonNavItems = listOf(HomeScreen_O, GarageScreen_O, ProfileScreen_O, Setti
 
 @Composable
 fun Navigation(
+    auth: FirebaseAuth,
     isUserLoggin: Boolean,
 
     initViewModel: InitViewModel,
@@ -149,6 +150,7 @@ fun Navigation(
 
                     is ProfileScreen_O -> NavEntry(key) {
                         ProfileScreen(
+                            auth = auth,
                             navToSettings = {
                                 backStack.add(SettingsScreen_O)
                             },
@@ -166,8 +168,14 @@ fun Navigation(
 
                     is InfoCarScreen_C -> NavEntry(key) {
                         InfoCarScreen(
-                            key.car
+                            car = key.car,
+                            goBack = {
+                                if (backStack.size > 1){
+                                    backStack.removeLastOrNull()
+                                }
+                            }
                         )
+
                     }
 
                     // Error
