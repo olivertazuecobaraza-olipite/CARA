@@ -76,18 +76,18 @@ fun LoginScreen(
             horizontalAlignment = Alignment.CenterHorizontally
             )
         {
-
+            Spacer(Modifier.padding(5.dp))
             BackArrow {
                 loginViewModel.ResetEmailPassw()
                 navToback()
             }
-            Spacer(Modifier.padding(15.dp))
+            Spacer(Modifier.padding(30.dp))
 
             LogoImage()
-            Spacer(Modifier.padding(15.dp))
+            Spacer(Modifier.padding(20.dp))
             Texts()
 
-            Spacer(Modifier.padding(15.dp))
+            Spacer(Modifier.padding(20.dp))
             EmailPassFields(
                 email,
                 password,
@@ -107,10 +107,10 @@ fun LoginScreen(
             Spacer(Modifier.padding(5.dp))
             ForgotPassword {  }
 
-            Spacer(Modifier.padding(5.dp))
+            Spacer(Modifier.padding(10.dp))
             OtherLogsIcons()
 
-            Spacer(Modifier.padding(20.dp))
+            Spacer(Modifier.padding(40.dp))
             SignUp { navToRegister() }
         }
     }

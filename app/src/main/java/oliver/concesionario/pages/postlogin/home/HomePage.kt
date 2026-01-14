@@ -61,14 +61,21 @@ fun HomeScreen(
             .fillMaxWidth())
         {
 
-            TitleRow(navToProfile)
+
 
 
             LazyColumn(modifier = Modifier.padding(15.dp)) {
-                items(1){
+                item {
+                    TitleRow(navToProfile)
+                }
+
+                item {
                     SearchField(busqueda) { }
                 }
-                item { Spacer(Modifier.padding(5.dp)) }
+
+                item {
+                    Spacer(Modifier.padding(5.dp))
+                }
 
                 items(30){ i ->
                     if (i%2==0){

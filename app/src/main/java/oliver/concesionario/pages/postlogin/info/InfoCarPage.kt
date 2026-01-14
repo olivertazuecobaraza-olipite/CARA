@@ -60,11 +60,13 @@ fun InfoCarScreen(car: Car,
             CarImage(car.image)
             Icon(painter = painterResource(R.drawable.ic_back_icon),
                 contentDescription = null,
-                modifier = Modifier.clickable{ goBack() }.padding(10.dp))
+                modifier = Modifier
+                    .clickable{
+                        goBack()
+                    }
+                    .padding(10.dp))
             // Content
             InfoContent(car)
-
-
         }
     }
 }
