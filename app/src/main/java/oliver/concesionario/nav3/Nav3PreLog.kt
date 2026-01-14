@@ -1,6 +1,8 @@
 package oliver.concesionario.nav3
 
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
@@ -9,10 +11,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.unit.dp
 import androidx.navigation3.runtime.NavBackStack
 import androidx.navigation3.runtime.NavEntry
 import androidx.navigation3.ui.NavDisplay
 import com.google.firebase.auth.FirebaseAuth
+import oliver.concesionario.R
 import oliver.concesionario.model.Car
 import oliver.concesionario.pages.postlogin.garage.GarageScreen
 import oliver.concesionario.pages.postlogin.home.HomeScreen
@@ -62,7 +67,7 @@ fun Navigation(
 
 
     val startingScreen = if (isUserLoggin) HomeScreen_O else InitScreen_O
-    var backStack = remember { mutableStateListOf(startingScreen) }
+    val backStack = remember { mutableStateListOf(startingScreen) }
 
     val showBottomBar = backStack.last() in listOf(
         HomeScreen_O,
@@ -218,25 +223,24 @@ fun BottomNavigationBar(backStack: MutableList<Any>){
             NavigationBarItem(
                 selected = currenScreen::class == screen::class,
                 onClick = {
-                    if (currenScreen::class != screen::class){
-                        backStack.removeAll {it::class == screen::class}
+                    if (currenScreen::class != screen::class) {
+                        backStack.removeAll { it::class == screen::class }
                         backStack.add(screen)
                     }
                 },
                 icon = {
-                    Text(
-                        text = when (screen) {
-                            HomeScreen_O -> "🏠"
-                            GarageScreen_O -> "🚗"
-                            ProfileScreen_O -> "👤"
-                            SettingsScreen_O -> "⚙️"
-                            else -> ""
-                        }
-                    )
+                    val icon: Int = when (screen) {
+                        HomeScreen_O -> R.drawable.ic_home
+                        GarageScreen_O -> R.drawable.ic_car
+                        ProfileScreen_O -> R.drawable.account_circle_24px
+                        SettingsScreen_O -> R.drawable.settings_24px
+                        else -> {}
+                    } as Int
+                    Icon(painter = painterResource(icon),
+                        contentDescription = null,
+                        modifier = Modifier.size(24.dp))
                 }
             )
         }
     }
-
-
 }
