@@ -103,9 +103,9 @@ fun HomeScreen(
 // Title Row
 @Composable
 fun TitleRow(navToProfile: () -> Unit){
-    Row( modifier = Modifier
-        .padding(horizontal = 15.dp)
-        .fillMaxWidth(),
+    Row(modifier = Modifier
+            .padding(horizontal = 15.dp, vertical = 5.dp)
+            .fillMaxWidth(),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween,
        )
