@@ -102,7 +102,7 @@ private fun ContentCars(listCars: List<Car>, navToDetailCar: (Car) -> Unit){
 
                 listCars.forEach { car ->
                     CardCar(car = car, navToDetailCar = navToDetailCar)
-                    Spacer(Modifier.padding(3.dp))
+                    Spacer(Modifier.padding(5.dp))
                 }
             }
         }
