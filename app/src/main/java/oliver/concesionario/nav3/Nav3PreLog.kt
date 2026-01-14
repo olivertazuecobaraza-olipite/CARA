@@ -170,9 +170,8 @@ fun Navigation(
                         InfoCarScreen(
                             car = key.car,
                             goBack = {
-                                if (backStack.size > 1){
-                                    backStack.removeLastOrNull()
-                                }
+                                backStack.clear()
+                                backStack.add(HomeScreen_O)
                             }
                         )
 

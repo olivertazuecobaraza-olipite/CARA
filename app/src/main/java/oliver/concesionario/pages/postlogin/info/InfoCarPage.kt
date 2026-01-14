@@ -1,5 +1,6 @@
 package oliver.concesionario.pages.postlogin.info
 
+import android.R.attr.onClick
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -24,6 +25,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import oliver.concesionario.R
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
@@ -49,7 +51,7 @@ fun InfoCarScreen(car: Car,
                   goBack: () -> Unit){
     Scaffold(modifier = Modifier.fillMaxSize(),
         bottomBar = {
-            AddGarageButton {}
+            AddGarageButton {goBack()}
         }) { paddingValues ->
         Box(
             modifier = Modifier
@@ -58,13 +60,15 @@ fun InfoCarScreen(car: Car,
         ){
             // Image
             CarImage(car.image)
-            Icon(painter = painterResource(R.drawable.ic_back_icon),
+
+            Image(painter = painterResource(R.drawable.ic_back_icon),
                 contentDescription = null,
                 modifier = Modifier
-                    .clickable{
+                    .clickable {
                         goBack()
                     }
-                    .padding(10.dp))
+                    .padding(15.dp))
+
             // Content
             InfoContent(car)
         }
@@ -251,7 +255,7 @@ fun AddGarageButton(addGarage:() -> Unit){
         .background(Color.White),
     ) {
         Button(
-            onClick = {},
+            onClick = { addGarage()},
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(15.dp)
