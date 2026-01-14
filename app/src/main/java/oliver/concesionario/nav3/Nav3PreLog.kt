@@ -18,6 +18,7 @@ import oliver.concesionario.pages.postlogin.garage.GarageScreen
 import oliver.concesionario.pages.postlogin.home.HomeScreen
 import oliver.concesionario.pages.postlogin.info.InfoCarScreen
 import oliver.concesionario.pages.postlogin.profile.ProfileScreen
+import oliver.concesionario.pages.postlogin.settings.SettingsScreen
 import oliver.concesionario.pages.prelogin.init.InitScreen
 import oliver.concesionario.pages.prelogin.login.LoginScreen
 import oliver.concesionario.pages.prelogin.register.RegisterScreen
@@ -179,7 +180,12 @@ fun Navigation(
                     }
 
                     is SettingsScreen_O -> NavEntry(key) {
+                        SettingsScreen(
+                            auth = auth,
+                            keepLogg= {
 
+                            }
+                        )
                     }
 
                     is InfoCarScreen_C -> NavEntry(key) {
