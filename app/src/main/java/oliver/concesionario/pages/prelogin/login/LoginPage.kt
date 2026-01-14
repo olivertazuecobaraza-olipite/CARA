@@ -69,19 +69,22 @@ fun LoginScreen(
 
 
     Scaffold(containerColor = Color(0xffE2E3E3),
-        modifier = Modifier.fillMaxSize())
+        modifier = Modifier.fillMaxSize(),
+        bottomBar = {
+            SignUp { navToRegister() }
+        },
+        topBar = {
+            BackArrow {
+                loginViewModel.ResetEmailPassw()
+                navToback()
+            }
+        })
     { paddingValues ->
         Column(Modifier.padding(paddingValues)
             .fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally
             )
         {
-            Spacer(Modifier.padding(5.dp))
-            BackArrow {
-                loginViewModel.ResetEmailPassw()
-                navToback()
-            }
-            Spacer(Modifier.padding(30.dp))
 
             LogoImage()
             Spacer(Modifier.padding(20.dp))
@@ -110,8 +113,7 @@ fun LoginScreen(
             Spacer(Modifier.padding(10.dp))
             OtherLogsIcons()
 
-            Spacer(Modifier.padding(40.dp))
-            SignUp { navToRegister() }
+
         }
     }
 
@@ -122,7 +124,7 @@ fun LoginScreen(
 private fun BackArrow(navToBack: () -> Unit){
     Row(modifier = Modifier
         .fillMaxWidth()
-        .padding(horizontal = 20.dp))
+        .padding(20.dp))
     {
         Image(painter = painterResource(R.drawable.ic_back_icon),
             contentDescription = "",
@@ -283,9 +285,19 @@ private fun LoginButton(onLogClic: () -> Unit){
 // Forgot password
 @Composable
 private fun ForgotPassword(onForgotPassword: () -> Unit){
-    Text(text = "Forgot your password?",
-        color = Color.DarkGray,
-        modifier = Modifier.clickable(onClick = { onForgotPassword() }))
+    Row(modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.Center) {
+        Text(text = "Forgot yout password? ",
+            color = Color.DarkGray,
+            fontWeight = FontWeight.Bold,
+            fontSize = 12.sp)
+        Text(text = "Click here",
+            color = Color.Blue,
+            fontSize = 14.sp,
+            fontWeight = FontWeight.Bold,
+            modifier = Modifier.clickable(onClick = { onForgotPassword() }))
+    }
+
 }
 
 // Google Apple Logos
@@ -341,7 +353,7 @@ private fun AppleIcon(){
 private fun SignUp(onSignUpClic: () -> Unit){
     Row(modifier = Modifier
             .fillMaxWidth()
-            .fillMaxHeight()
+            .height(60.dp)
         .background(color = Color(0xffced4da)),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.Center,
