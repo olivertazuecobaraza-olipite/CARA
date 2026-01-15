@@ -223,7 +223,6 @@ private fun LeftCard(car: Car,
                     modifier = Modifier.fillMaxSize(),
                     contentScale = ContentScale.Fit
                 )
-
             }
         }
     }
@@ -254,8 +253,19 @@ private fun RightCard(car: Car,
                     .background(Color(0xFFF1F1F1))
             )
             {
+                // painter car
+                val painter = if (car.imageStr.length > 1){
+                    rememberAsyncImagePainter(
+                        model = ImageRequest.Builder(LocalPlatformContext.current)
+                            .data(car.imageStr)
+                            .build()
+                    )
+                } else {
+                    painterResource(id = car.image)
+                }
+
                 Image(
-                    painter = painterResource(id = car.image),
+                    painter = painter,
                     contentDescription = null,
                     modifier = Modifier.fillMaxSize(),
                     contentScale = ContentScale.Fit
