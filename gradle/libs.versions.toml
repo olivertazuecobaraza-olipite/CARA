@@ -7,12 +7,12 @@ espressoCore = "3.7.0"
 lifecycleRuntimeKtx = "2.10.0"
 activityCompose = "1.12.2"
 kotlin = "2.3.0"
-composeBom = "2025.12.01"
-runtimeLivedata = "1.10.0"
+composeBom = "2026.01.00"
+runtimeLivedata = "1.10.1"
 nav3core = "1.0.0"
 firebom = "34.7.0"
 googleservices = "4.4.4"
-
+coilver="3.3.0"
 
 
 [libraries]
@@ -42,8 +42,11 @@ firebase-bom = {module = "com.google.firebase:firebase-bom", version.ref = "fire
 firebase-auth = {module="com.google.firebase:firebase-auth"}
 firebase-firestore = {module="com.google.firebase:firebase-firestore"}
 
+#Coil
+coil-compose = {module="io.coil-kt.coil3:coil-compose", version.ref="coilver"}
+
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
-googleSrevices = { id= "com.google.gms.google-services", version.ref = "googleservices" } # Firebase
+googleSrevices = { id= "com.google.gms.google-services", version.ref = "googleservices" } # Firebase service
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 

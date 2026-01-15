@@ -36,6 +36,10 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import coil3.compose.AsyncImage
+import coil3.compose.LocalPlatformContext
+import coil3.compose.rememberAsyncImagePainter
+import coil3.request.ImageRequest
 import oliver.concesionario.R
 import oliver.concesionario.viewmodels.postlogin.homeviewmodel.HomeViewModel
 import oliver.concesionario.model.Car
@@ -49,12 +53,7 @@ fun HomeScreen(homeViewModel: HomeViewModel,
     Scaffold(containerColor = Color(0xffE2E3E3),
             modifier = Modifier.fillMaxSize()) { paddingValues ->
         Column(modifier = Modifier
-            .padding(
-                start = 0.dp,
-                end = 0.dp,
-                top = 0.dp, // 🔥 CLAVE
-                bottom = paddingValues.calculateBottomPadding()
-            )
+            .padding(paddingValues)
             .fillMaxWidth())
         {
 
@@ -207,12 +206,24 @@ private fun LeftCard(car: Car,
                     .background(Color(0xFFF1F1F1))
             )
             {
+                // painter car
+                val painter = if (car.imageStr.length > 1){
+                    rememberAsyncImagePainter(
+                        model = ImageRequest.Builder(LocalPlatformContext.current)
+                            .data(car.imageStr)
+                            .build()
+                    )
+                } else {
+                    painterResource(id = car.image)
+                }
+
                 Image(
-                    painter = painterResource(id = car.image),
+                    painter = painter,
                     contentDescription = null,
                     modifier = Modifier.fillMaxSize(),
                     contentScale = ContentScale.Fit
                 )
+
             }
         }
     }
