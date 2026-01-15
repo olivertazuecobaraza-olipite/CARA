@@ -15,7 +15,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
@@ -38,7 +37,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import coil3.compose.AsyncImage
 import coil3.compose.LocalPlatformContext
 import coil3.compose.rememberAsyncImagePainter
 import coil3.request.ImageRequest
@@ -51,7 +49,7 @@ fun HomeScreen(homeViewModel: HomeViewModel,
                 navToProfile: () -> Unit,
                 navToDetailCar: (Car) -> Unit)
 {
-    val busqueda by homeViewModel.Search.observeAsState(initial = "")
+    val search by homeViewModel.Search.observeAsState(initial = "")
     val carList by homeViewModel.CarList.observeAsState(initial = mutableListOf())
     Scaffold(containerColor = Color(0xffE2E3E3),
             modifier = Modifier.fillMaxSize()) { paddingValues ->
@@ -67,8 +65,8 @@ fun HomeScreen(homeViewModel: HomeViewModel,
                 }
 
                 item {
-                    SearchField(busqueda,
-                        onBusquedaChange = { newStr ->
+                    SearchField(search,
+                        onSearchChange = { newStr ->
                             homeViewModel.OnSeachValueChange(newStr)
                     })
                 }
@@ -114,11 +112,11 @@ private fun TitleRow(navToProfile: () -> Unit){
 
 // Search a car Field
 @Composable
-private fun SearchField(busqueda: String,
-                onBusquedaChange: (String) -> Unit){
+private fun SearchField(search: String,
+                onSearchChange: (String) -> Unit){
     TextField(
-        value = busqueda,
-        onValueChange = { onBusquedaChange(it) },
+        value = search,
+        onValueChange = { onSearchChange(it) },
         leadingIcon = {
             Icon(painter = painterResource(R.drawable.search_24px),
                 tint = Color.Gray,
@@ -162,7 +160,7 @@ private fun LeftCard(car: Car,
     {
         Row(modifier = Modifier.fillMaxSize())
         {
-            // Left texto
+            // Left text
             Column(
                 modifier = Modifier
                 .weight(1f)
@@ -263,7 +261,7 @@ private fun RightCard(car: Car,
                     contentScale = ContentScale.Fit
                 )
             }
-            // Right texto
+            // Right text
             Column(
                 modifier = Modifier
                     .weight(1f)

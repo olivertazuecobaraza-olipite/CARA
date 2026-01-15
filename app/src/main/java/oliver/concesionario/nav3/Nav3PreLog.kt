@@ -36,19 +36,19 @@ import oliver.concesionario.viewmodels.prelogin.registerviewmodel.RegisterViewMo
 
 // Data objects or class, by screens/ pages created in the app
 // [Start, data object/classes
-data object LoginScreen_O
+data object LoginScreenO
 
-data object RegisterScreen_O
+data object RegisterScreenO
 
-data object InitScreen_O
+data object InitScreenO
 
-data object HomeScreen_O
+data object HomeScreenO
 
-data object GarageScreen_O
-data object ProfileScreen_O
+data object GarageScreenO
+data object ProfileScreenO
 
-data object SettingsScreen_O
-data class InfoCarScreen_C(
+data object SettingsScreenO
+data class InfoCarScreenC(
     val car: Car
 )
 // [End, data object/classes
@@ -56,7 +56,7 @@ data class InfoCarScreen_C(
 
 
 // Navigation bar buttons screens
-val bottonNavItems = listOf(HomeScreen_O, GarageScreen_O, ProfileScreen_O, SettingsScreen_O)
+val bottonNavItems = listOf(HomeScreenO, GarageScreenO, ProfileScreenO, SettingsScreenO)
 
 // Set the Stack where the screens will be later
 lateinit var backStack: SnapshotStateList<Any>
@@ -68,7 +68,7 @@ fun Navigation(
     // [Start, params]
     auth: FirebaseAuth,
     database: FirebaseFirestore,
-    isUserLoggin: Boolean,
+    isUserLogg: Boolean,
 
     initViewModel: InitViewModel,
     loginViewModel: LoginViewModel,
@@ -81,17 +81,17 @@ fun Navigation(
     // [Start, Tools,
     // Set the starting screen depends on user is logged or not,
     // Set the BackStack with all screens needed
-    val startingScreen = if (isUserLoggin) HomeScreen_O else InitScreen_O
+    val startingScreen = if (isUserLogg) HomeScreenO else InitScreenO
     backStack = remember { mutableStateListOf(startingScreen) }
     // [End, Tools]
     // [Start, can Show NavBar?,
     // if the last screen of the stack(Screen where the user is) is in the list of the screens then is true
     // so after can show the NavBar
     val showBottomBar = backStack.last() in listOf(
-        HomeScreen_O,
-        GarageScreen_O,
-        ProfileScreen_O,
-        SettingsScreen_O
+        HomeScreenO,
+        GarageScreenO,
+        ProfileScreenO,
+        SettingsScreenO
     )
     // [End, can show NavBar]
 
@@ -117,29 +117,29 @@ fun Navigation(
                     // [Start, PreLogin]
 
                     // [Start, InitScreen]
-                    is InitScreen_O -> NavEntry(key){
+                    is InitScreenO -> NavEntry(key){
                         InitScreen( // Set params
-                            navToLogin = { NavTo(LoginScreen_O) },// Add new screen to the top(LoginScreen)
-                            navToRegister = { NavTo(RegisterScreen_O) },// Add new screen to the top(RegisterScreen)
+                            navToLogin = { navTo(LoginScreenO) },// Add new screen to the top(LoginScreen)
+                            navToRegister = { navTo(RegisterScreenO) },// Add new screen to the top(RegisterScreen)
                             initViewModel = initViewModel, // Set ViewModel(InitViewModel)
                         )
                     }
                     // [End, InitScreen]
                     // [Start, LoginScreen]
-                    is LoginScreen_O -> NavEntry(key) {
+                    is LoginScreenO -> NavEntry(key) {
                         LoginScreen( // Set params
-                            navToRegister = { NavTo(RegisterScreen_O) },// Add new Screen to the top(RegisterScreen)
-                            navToHome = { NavTo(HomeScreen_O) },// Add new Screen to the top(HomeScreen)
-                            navToback = { NavBack() },// Delete Last/current Screen from the stack, so the previous is the new CurrentScreen
+                            navToRegister = { navTo(RegisterScreenO) },// Add new Screen to the top(RegisterScreen)
+                            navToHome = { navTo(HomeScreenO) },// Add new Screen to the top(HomeScreen)
+                            navToback = { navBack() },// Delete Last/current Screen from the stack, so the previous is the new CurrentScreen
                             loginViewModel = loginViewModel, // Set ViewModel(LoginViewModel)
                         )
                     }
                     // [End, LoginScreen]
                     // [Start, RegisterScreen]
-                    is RegisterScreen_O -> NavEntry(key) {
+                    is RegisterScreenO -> NavEntry(key) {
                         RegisterScreen(
-                            navToLogin = { NavTo(LoginScreen_O) }, // Add new Screen to the top(LoginScreen)
-                            navToback = { NavBack() }, // Delete Last/current Screen from the stack, so the previous is the new CurrentScreen
+                            navToLogin = { navTo(LoginScreenO) }, // Add new Screen to the top(LoginScreen)
+                            navToback = { navBack() }, // Delete Last/current Screen from the stack, so the previous is the new CurrentScreen
                             registerViewModel = registerViewModel // Set ViewModel(RegisterViewModel)
                         )
                     }
@@ -148,38 +148,38 @@ fun Navigation(
 
                     // [Start, PostLogin]
                     // [Start, HomeScreen]
-                    is HomeScreen_O -> NavEntry(key) {
+                    is HomeScreenO -> NavEntry(key) {
                         HomeScreen(
-                            navToProfile = { NavTo(ProfileScreen_O) }, // Add new Screen to the top(ProfileScreen)
+                            navToProfile = { navTo(ProfileScreenO) }, // Add new Screen to the top(ProfileScreen)
                             navToDetailCar = { car -> // Param by the car clicked
-                                NavTo(InfoCarScreen_C(car)) }, // Add new Screen to the top(InfoCarScreen)
+                                navTo(InfoCarScreenC(car)) }, // Add new Screen to the top(InfoCarScreen)
                             homeViewModel = homeViewModel // Set ViewModel(HomeViewModel)
                         )
                     }
                     // [End, HomeScreen]
                     // [Start, GarageScreen]
-                    is GarageScreen_O -> NavEntry(key){
+                    is GarageScreenO -> NavEntry(key){
                         GarageScreen(
                             listCars = listOf(), // List of cars in owner Garage
                             navToDetailCar = { car -> // Param by the car clicked
-                                NavTo(InfoCarScreen_C(car)) } // Add new Screen to the top(InfoCarScreen)
+                                navTo(InfoCarScreenC(car)) } // Add new Screen to the top(InfoCarScreen)
                         )
                     }
                     // [End, GarageScreen]
                     // [Start, ProfileScreen]
-                    is ProfileScreen_O -> NavEntry(key) {
+                    is ProfileScreenO -> NavEntry(key) {
                         ProfileScreen(
                             auth = auth, // Set param Auth from FireBase, to print some user info
-                            navToSettings = { NavTo(SettingsScreen_O) }, // Add new Screen to the top(SettingsScreen)
+                            navToSettings = { navTo(SettingsScreenO) }, // Add new Screen to the top(SettingsScreen)
                             navToInit = { // Nav to Init
-                                ClearBackStack() // Firs, how user is navigating to Init, lets clear the back stack to do not use back button
-                                NavTo(InitScreen_O) }, // Now Add new Screen to the top when is empty so now Init is like user would reset the app
+                                clearBackStack() // Firs, how user is navigating to Init, lets clear the back stack to do not use back button
+                                navTo(InitScreenO) }, // Now Add new Screen to the top when is empty so now Init is like user would reset the app
                             profileViewModel = profileViewModel // Set ViewModel(ProfileViewModel)
                         )
                     }
                     // [End, ProfileScreen]
                     // [Start, SettingsScreen]
-                    is SettingsScreen_O -> NavEntry(key) {
+                    is SettingsScreenO -> NavEntry(key) {
                         SettingsScreen(
                             auth = auth, // Set Param Auth from FireBase, to sign out
                             keepLogg= { //
@@ -189,17 +189,17 @@ fun Navigation(
                     }
                     // [End, SettingsScreen]
                     // [Start, InfoCarScreen]
-                    is InfoCarScreen_C -> NavEntry(key) {
+                    is InfoCarScreenC -> NavEntry(key) {
                         InfoCarScreen(
                             car = key.car,// Set Param Car's clicked
-                            goBack = { NavBack() } // Delete Last/current Screen from the stack, so the previous is the new CurrentScreen
+                            goBack = { navBack() } // Delete Last/current Screen from the stack, so the previous is the new CurrentScreen
                         )
                     }
                     // [End, InfoCarScreen]
 
                     // Error
                     else -> NavEntry(key = Unit) {
-                        Text("Error runing")
+                        Text("Error running")
                     }
                 }
             }
@@ -215,15 +215,15 @@ fun Navigation(
 @Composable
 fun BottomNavigationBar(backStack: MutableList<Any>){
     // Set current screen is the last item from the backstack
-    val currenScreen = backStack.last()
+    val currentScreen = backStack.last()
 
     // [Start, Set Navigation Bar]
-    NavigationBar() {
+    NavigationBar {
         bottonNavItems.forEach { screen ->
             NavigationBarItem(
-                selected = currenScreen::class == screen::class,
+                selected = currentScreen::class == screen::class,
                 onClick = { // Onclick add to top's stack the screen tapped
-                    if (currenScreen::class != screen::class) {
+                    if (currentScreen::class != screen::class) {
                         backStack.removeAll { it::class == screen::class }
                         backStack.add(screen)
                     }
@@ -231,10 +231,10 @@ fun BottomNavigationBar(backStack: MutableList<Any>){
                 // Set painter for each icon of screen, I want in my Navigation bar
                 icon = {
                     val icon: Int = when (screen) {
-                        HomeScreen_O -> R.drawable.ic_home
-                        GarageScreen_O -> R.drawable.ic_car
-                        ProfileScreen_O -> R.drawable.account_circle_24px
-                        SettingsScreen_O -> R.drawable.settings_24px
+                        HomeScreenO -> R.drawable.ic_home
+                        GarageScreenO -> R.drawable.ic_car
+                        ProfileScreenO -> R.drawable.account_circle_24px
+                        SettingsScreenO -> R.drawable.settings_24px
                         else -> {}
                     } as Int
                     // Set icon with the previous Painter created
@@ -251,19 +251,19 @@ fun BottomNavigationBar(backStack: MutableList<Any>){
 // [End, Navigation Bar]
 
 // [Start, NavTo tool, Tool to set the current screen which you want by param
-private fun NavTo(screen: Any){
+private fun navTo(screen: Any){
     backStack.add(screen)
 }
 // [End, NavTo]
 // [Start, NavBack, Remove last screen at the stack/current screen, then it goes back]
-private fun NavBack(){
+private fun navBack(){
     if (backStack.size > 1){
         backStack.removeLastOrNull()
     }
 }
 // [End, NavBack]
 // [Start, ClearBackstack]
-private fun ClearBackStack(){
+private fun clearBackStack(){
     backStack.clear()
 }
 // [End, ClearBackStack]

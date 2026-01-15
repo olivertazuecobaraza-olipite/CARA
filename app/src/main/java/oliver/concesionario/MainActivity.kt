@@ -37,7 +37,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             Navigation(auth = auth,
                 database = db,
-                isUserLoggin = isLogg,
+                isUserLogg = isLogg,
                 InitViewModel(),
                 LoginViewModel(auth),
                 RegisterViewModel(auth),
