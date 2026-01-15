@@ -38,9 +38,9 @@ androidx-navigation3-ui = { module = "androidx.navigation3:navigation3-ui", vers
 
 # FireBase
 firebase-bom = {module = "com.google.firebase:firebase-bom", version.ref = "firebom"}
-firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics", version="20.0.3"}
-firebase-auth-ktx = { module= "com.google.firebase:firebase-auth-ktx", version="23.2.1" }
-
+#firebase-crashlytics = {module="com.google.firebase:firebase-crashlytics"}
+firebase-auth = {module="com.google.firebase:firebase-auth"}
+firebase-firestore = {module="com.google.firebase:firebase-firestore"}
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

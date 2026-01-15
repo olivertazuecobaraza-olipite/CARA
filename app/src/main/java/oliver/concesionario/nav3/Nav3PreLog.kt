@@ -13,10 +13,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import androidx.navigation3.runtime.NavBackStack
 import androidx.navigation3.runtime.NavEntry
 import androidx.navigation3.ui.NavDisplay
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import oliver.concesionario.R
 import oliver.concesionario.model.Car
 import oliver.concesionario.pages.postlogin.garage.GarageScreen
@@ -27,6 +27,7 @@ import oliver.concesionario.pages.postlogin.settings.SettingsScreen
 import oliver.concesionario.pages.prelogin.init.InitScreen
 import oliver.concesionario.pages.prelogin.login.LoginScreen
 import oliver.concesionario.pages.prelogin.register.RegisterScreen
+import oliver.concesionario.viewmodels.postlogin.homeviewmodel.HomeViewModel
 import oliver.concesionario.viewmodels.postlogin.profileviewmodel.ProfileViewModel
 import oliver.concesionario.viewmodels.prelogin.initviewmodel.InitViewModel
 import oliver.concesionario.viewmodels.prelogin.loginviewmodel.LoginViewModel
@@ -56,12 +57,14 @@ val bottonNavItems = listOf(HomeScreen_O, GarageScreen_O, ProfileScreen_O, Setti
 @Composable
 fun Navigation(
     auth: FirebaseAuth,
+    database: FirebaseFirestore,
     isUserLoggin: Boolean,
 
     initViewModel: InitViewModel,
     loginViewModel: LoginViewModel,
     registerViewModel: RegisterViewModel,
-    profileViewModel: ProfileViewModel
+    profileViewModel: ProfileViewModel,
+    homeViewModel: HomeViewModel
 ){
     // Tab Bar items
 
@@ -142,6 +145,7 @@ fun Navigation(
                     // Post Login
                     is HomeScreen_O -> NavEntry(key) {
                         HomeScreen(
+                            homeViewModel = homeViewModel,
                             navToProfile = {
                                 backStack.add(ProfileScreen_O)
                             },
