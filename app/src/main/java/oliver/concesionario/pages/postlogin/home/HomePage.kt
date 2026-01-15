@@ -15,6 +15,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -50,6 +52,7 @@ fun HomeScreen(homeViewModel: HomeViewModel,
                 navToDetailCar: (Car) -> Unit)
 {
     val busqueda by homeViewModel.Search.observeAsState(initial = "")
+    val carList by homeViewModel.CarList.observeAsState(initial = mutableListOf())
     Scaffold(containerColor = Color(0xffE2E3E3),
             modifier = Modifier.fillMaxSize()) { paddingValues ->
         Column(modifier = Modifier
@@ -74,22 +77,11 @@ fun HomeScreen(homeViewModel: HomeViewModel,
                     Spacer(Modifier.padding(5.dp))
                 }
 
-                items(30){ i ->
-                    if (i%2==0){
-                        // List coches
-                        LeftCard(Car(
-                            name = "Ferrari f40",
-                            type = "Sport",
-                            price ="123123$"
-                        )) { navToDetailCar(it) }
-                        Spacer(Modifier.padding(5.dp))
+                itemsIndexed(carList){index, car ->
+                    if (index%2== 0){
+                        LeftCard(car, navToDetailCar)
                     } else {
-                        RightCard(Car(
-                            name = "Ferrari f40",
-                            type = "Sport",
-                            price = "123123$")
-                        ) { navToDetailCar(it) }
-                        Spacer(Modifier.padding(5.dp))
+                        RightCard(car, navToDetailCar)
                     }
                 }
             }
