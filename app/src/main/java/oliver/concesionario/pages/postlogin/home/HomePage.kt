@@ -43,7 +43,7 @@ import coil3.request.ImageRequest
 import oliver.concesionario.R
 import oliver.concesionario.viewmodels.postlogin.homeviewmodel.HomeViewModel
 import oliver.concesionario.model.Car
-
+// [Start, HomeScreen, Set public HomeScreen is a global screen]
 @Composable
 fun HomeScreen(homeViewModel: HomeViewModel,
                 navToProfile: () -> Unit,
@@ -60,22 +60,21 @@ fun HomeScreen(homeViewModel: HomeViewModel,
 
 
             LazyColumn(modifier = Modifier.padding(15.dp)) {
-                item {
-                    TitleRow(navToProfile)
-                }
+                item { TitleRow(navToProfile) } // Title, Catalog and Profile Icon
 
                 item {
-                    SearchField(search,
+                    SearchField(search, // SearchBar
                         onSearchChange = { newStr ->
                             homeViewModel.OnSeachValueChange(newStr)
                     })
                 }
 
-                item {
+                item { // Spacer
                     Spacer(Modifier.padding(5.dp))
                 }
 
-                itemsIndexed(carList){index, car ->
+                itemsIndexed(carList){ // Car List
+                    index, car ->
                     if (index%2== 0){
                         LeftCard(car, navToDetailCar)
                     } else {
@@ -86,9 +85,9 @@ fun HomeScreen(homeViewModel: HomeViewModel,
         }
     }
 }
+// [End, HomeScreen]
 
-
-// Title Row
+// [Start, TitleRow, Catalog and ProfileIcon]
 @Composable
 private fun TitleRow(navToProfile: () -> Unit){
     Row(modifier = Modifier
@@ -98,19 +97,20 @@ private fun TitleRow(navToProfile: () -> Unit){
         horizontalArrangement = Arrangement.SpaceBetween,
        )
     {
-        Text(text = "CATALOG",
+        Text(text = "CATALOG", // Text Catalog
             fontSize = 30.sp,
             fontWeight = FontWeight.Bold)
         IconButton (onClick = { navToProfile() })
-        {
+        {   // ProfileIcon
             Icon(painter = painterResource(R.drawable.account_circle_24px),
                 contentDescription = "",
                 tint = Color.Black)
         }
     }
 }
+// [End, TitleRow]
 
-// Search a car Field
+// [Start, SearcBarField]
 @Composable
 private fun SearchField(search: String,
                 onSearchChange: (String) -> Unit){
@@ -141,9 +141,11 @@ private fun SearchField(search: String,
                 shape = RoundedCornerShape(25))
             .shadow(elevation = 2.dp, shape = RoundedCornerShape(25))
 
-        )
+    )
 }
-// Left car Card
+// [End, SearchBarField]
+
+// [Start, LeftCard]
 @Composable
 private fun LeftCard(car: Car,
              navToDetailCar :(Car) -> Unit
@@ -217,8 +219,9 @@ private fun LeftCard(car: Car,
         }
     }
 }
+// [End, LeftCard]
 
-// RighCard
+// [Start, RightCard]
 @Composable
 private fun RightCard(car: Car,
              navToDetailCar :(Car) -> Unit
@@ -294,3 +297,4 @@ private fun RightCard(car: Car,
         }
     }
 }
+// [End, RightCard]
