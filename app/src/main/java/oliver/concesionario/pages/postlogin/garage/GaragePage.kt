@@ -34,7 +34,7 @@ import androidx.compose.ui.unit.sp
 import oliver.concesionario.model.Car
 
 private lateinit var carSelected: Car
-
+// [Start, GarageScreen, Set public method GarageScreen, is a global screen]
 @Composable
 fun GarageScreen(listCars: List<Car> = listOf(),
                  navToDetailCar: (Car) -> Unit = {}){
@@ -52,6 +52,7 @@ fun GarageScreen(listCars: List<Car> = listOf(),
         }
     }
 }
+
 
 
 @Composable
