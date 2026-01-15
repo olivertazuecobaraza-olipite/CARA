@@ -54,7 +54,7 @@ private fun CompleteScreen(listCars: List<Car>, navToDetailCar: (Car) -> Unit){
         Box(modifier = Modifier.fillMaxSize().padding(paddingValues)) {
             // Image
             CarImage(listCars[0].image)
-            // Contents
+            // Content
             ContentCars(listCars, navToDetailCar)
         }
     }
