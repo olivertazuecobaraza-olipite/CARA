@@ -38,9 +38,8 @@ class HomeViewModel(db: FirebaseFirestore) {
 
     // Get Cars from concesionaro method
     private fun GetAllCarConcesionario(){
-        val fb = db.collection("concesionario")
 
-        fb.get()
+        db.collection("concesionario").get()
             .addOnSuccessListener { result ->
                 _carList.value = result.toObjects(Car::class.java)
             }
