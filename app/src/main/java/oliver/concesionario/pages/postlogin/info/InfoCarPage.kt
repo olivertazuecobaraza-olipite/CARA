@@ -30,6 +30,8 @@ import oliver.concesionario.R
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -52,6 +54,9 @@ fun InfoCarScreen(car: Car,
     Scaffold(modifier = Modifier.fillMaxSize(),
         bottomBar = {
             AddGarageButton {goBack()}
+        },
+        topBar = {
+            BackArrow(goBack)
         }) { paddingValues ->
         Box(
             modifier = Modifier
@@ -61,20 +66,23 @@ fun InfoCarScreen(car: Car,
             // Image
             CarImage(car.image)
 
-            Image(painter = painterResource(R.drawable.ic_back_icon),
-                contentDescription = null,
-                modifier = Modifier
-                    .clickable {
-                        goBack()
-                    }
-                    .padding(15.dp))
-
             // Content
             InfoContent(car)
         }
     }
 }
 
+
+@Composable
+fun BackArrow(goBack: () -> Unit){
+    Image(painter = painterResource(R.drawable.ic_back_icon),
+        contentDescription = null,
+        modifier = Modifier
+            .clickable {
+                goBack()
+            }
+            .padding(10.dp))
+}
 @Composable
 private fun CarImage(image: Int){
     Image(painter = painterResource(image),
