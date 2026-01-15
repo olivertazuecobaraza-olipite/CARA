@@ -13,7 +13,7 @@ nav3core = "1.0.0"
 firebom = "34.7.0"
 googleservices = "4.4.4"
 coilver="3.3.0"
-
+gsonver="2.13.2"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -45,6 +45,8 @@ firebase-firestore = {module="com.google.firebase:firebase-firestore"}
 #Coil
 coil-compose = {module="io.coil-kt.coil3:coil-compose", version.ref="coilver"}
 
+#Gson
+gson-compose = {module="com.google.code.gson:gson", version.ref="gsonver"}
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 googleSrevices = { id= "com.google.gms.google-services", version.ref = "googleservices" } # Firebase service

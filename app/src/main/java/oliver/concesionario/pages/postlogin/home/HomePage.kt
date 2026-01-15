@@ -279,17 +279,20 @@ private fun RightCard(car: Car,
                     .padding(16.dp),
                 verticalArrangement = Arrangement.Center)
             {
+
                 Text(
                     text = car.name,
                     fontWeight = FontWeight.Bold,
                     fontSize = 18.sp,
                     color = Color.Black
                 )
+
                 Text(
                     text = car.type,
                     fontSize = 14.sp,
                     color = Color.Gray
                 )
+
                 Spacer(modifier = Modifier.height(4.dp))
                 Text(
                     text = "${car.price}$",
