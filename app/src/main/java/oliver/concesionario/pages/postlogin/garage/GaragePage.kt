@@ -42,19 +42,12 @@ fun GarageScreen(listCars: List<Car> = listOf(),
         carSelected = listCars[0]
         CompleteScreen(listCars, navToDetailCar)
     } else {
-        Box(modifier = Modifier
-            .fillMaxSize(),
-            contentAlignment = Alignment.Center
-        ){
-            Text(text = "No cars in Garage",
-                fontSize = 32.sp,
-                fontWeight = FontWeight.Bold)
-        }
+        EmptyScreen()
     }
 }
+// [End, GarageScreen]
 
-
-
+// [Start, CompleteScreen, When there are cars in the list this is shown]
 @Composable
 private fun CompleteScreen(listCars: List<Car>, navToDetailCar: (Car) -> Unit){
     Scaffold(modifier = Modifier.fillMaxSize()) { paddingValues ->
@@ -66,8 +59,24 @@ private fun CompleteScreen(listCars: List<Car>, navToDetailCar: (Car) -> Unit){
         }
     }
 }
+// [End, CompletedScreen]
 
-// Image
+// [Start, EmptyScreen, When there aren't cars in the garage this is shown]
+@Composable
+private fun EmptyScreen(){
+    Box(modifier = Modifier
+        .fillMaxSize(),
+        contentAlignment = Alignment.Center
+    ){
+        Text(text = "No cars in Garage",
+            fontSize = 32.sp,
+            fontWeight = FontWeight.Bold)
+    }
+}
+// [End, EmptyScreen]
+
+// [Start, CarImage, Car image is selected is Shown, by default is position 0 from the list, but if user clic to
+// other car to see Info when he back the image would be the last car selected
 @Composable
 private fun CarImage(image: Int){
     Image(painter = painterResource(image),
@@ -77,8 +86,9 @@ private fun CarImage(image: Int){
             .height(400.dp),
         contentScale = ContentScale.Crop)
 }
+// [End, CarImage]
 
-// Content
+// [Start, Content, ListCar scrollable]
 @Composable
 private fun ContentCars(listCars: List<Car>, navToDetailCar: (Car) -> Unit){
     Column(
@@ -109,7 +119,9 @@ private fun ContentCars(listCars: List<Car>, navToDetailCar: (Car) -> Unit){
         }
     }
 }
+// [End, Content]
 
+// [Start, CardCar, (Image, name, price)]
 @Composable
 private fun CardCar(car: Car, navToDetailCar: (Car) -> Unit){
     Card(modifier = Modifier
@@ -167,3 +179,4 @@ private fun CardCar(car: Car, navToDetailCar: (Car) -> Unit){
         }
     }
 }
+// [End, CardCar]
