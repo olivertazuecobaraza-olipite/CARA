@@ -48,17 +48,18 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import oliver.concesionario.model.Car
 
+// [Start, InfoCarScreen]
 @Composable
 fun InfoCarScreen(car: Car,
                   goBack: () -> Unit){
     Scaffold(modifier = Modifier.fillMaxSize(),
-        bottomBar = {
+        bottomBar = { // Set the bottom bar's Scaffold as a Button
             AddGarageButton {goBack()}
         },
-        topBar = {
+        topBar = { // Set the topbar's Scaffold as a BackArrowButton
             BackArrow(goBack)
         }) { paddingValues ->
-        Box(
+        Box( // Rest of the screen, content with car information
             modifier = Modifier
                 .fillMaxSize()
                 .padding(paddingValues)
@@ -71,8 +72,9 @@ fun InfoCarScreen(car: Car,
         }
     }
 }
+// [End, InfoCarScreen]
 
-
+// [Start, BackArrow, Button with a arrow to navigate back]
 @Composable
 fun BackArrow(goBack: () -> Unit){
     Image(painter = painterResource(R.drawable.ic_back_icon),
@@ -83,6 +85,8 @@ fun BackArrow(goBack: () -> Unit){
             }
             .padding(10.dp))
 }
+// [End, BackArrow]
+// [Start, CarImage]
 @Composable
 private fun CarImage(image: Int){
     Image(painter = painterResource(image),
@@ -92,7 +96,8 @@ private fun CarImage(image: Int){
             .height(400.dp),
         contentScale = ContentScale.Crop)
 }
-
+// [End, CarImage]
+// [Start, InfoContent]
 @Composable
 private fun InfoContent(car: Car){
     Column(
@@ -147,7 +152,8 @@ private fun InfoContent(car: Car){
         }
     }
 }
-
+// [End, InfoContent]
+// [Start, NameTypeText, name and Type car]
 @Composable
 private fun NameTypeText(car:Car){
     // Title
@@ -161,11 +167,13 @@ private fun NameTypeText(car:Car){
         color = Color.Gray
     )
 }
-
+// [End, NameTypeText]
+// [Start, StatsCar]
 @Composable
 private fun StatsCar(car: Car){
     // Km stats
     Column(modifier = Modifier.fillMaxWidth()) {
+        // KM
         Row(modifier = Modifier.fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically) {
             Icon(painter = painterResource(R.drawable.ic_battery),
@@ -173,7 +181,7 @@ private fun StatsCar(car: Car){
                 tint = Color.Gray)
             Text(text = "${car.km} KMs")
         }
-
+        // Stats
         Row(modifier = Modifier.fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically) {
             Icon(painter = painterResource(R.drawable.ic_timer),
@@ -184,18 +192,19 @@ private fun StatsCar(car: Car){
 
     }
 }
-
+// [End, StatsCar]
+// [Start, CarColorSelector]
 @Composable
 private fun CarColorSelector() {
-    // 1. Definimos el estado para saber qué índice está seleccionado (por defecto el 0)
+    // Def the state to know what color is selected, default is 0
     var selectedIndex by remember { mutableStateOf(0) }
 
-    // Lista de tus recursos de imagen
+    // List of image car colors, to pick
     val carImages = listOf(
         R.drawable.car_white,
         R.drawable.car_black,
         R.drawable.car_red,
-        R.drawable.car_green // Añadido según tus peticiones
+        R.drawable.car_green
     )
 
     Column {
@@ -205,7 +214,7 @@ private fun CarColorSelector() {
             horizontalArrangement = Arrangement.spacedBy(12.dp)
         ) {
             carImages.forEachIndexed { index, imageRes ->
-                CarCircle(
+                CarCircle( // Atomic method with Circle form and border selector
                     imageRes = imageRes,
                     isSelected = selectedIndex == index,
                     onClick = { selectedIndex = index },
@@ -215,12 +224,13 @@ private fun CarColorSelector() {
         }
     }
 }
-
+// [End, CarColorSelector]
+// [Start, CarCircle]
 @Composable
 private fun CarCircle(
     imageRes: Int,
     isSelected: Boolean,
-    onClick: () -> Unit, // 3. Añadimos un callback para el clic
+    onClick: () -> Unit,
     selectedColor: Color = Color.Black
 ) {
     Box(
@@ -231,7 +241,7 @@ private fun CarCircle(
                 color = if (isSelected) selectedColor else Color.LightGray.copy(alpha = 0.4f),
                 shape = CircleShape
             )
-            // 4. Hacemos que el componente reaccione al toque
+            // Set when clic change state and border
             .clickable(
                 interactionSource = remember { MutableInteractionSource() },
                 indication = null,
@@ -241,7 +251,7 @@ private fun CarCircle(
             .clip(CircleShape),
         contentAlignment = Alignment.Center
     ) {
-        Image(
+        Image( // Image
             painter = painterResource(id = imageRes),
             contentDescription = null,
 
@@ -250,14 +260,16 @@ private fun CarCircle(
         )
     }
 }
-
+// [End, CarCircle]
+// [Start, DescriptionCar]
 @Composable
 private fun DescriptionCar(car: Car){
     Text(
         text = car.description,
     )
 }
-
+// [End, DescriptionCar]
+// [Start, AddGarageButton, bottom bar button]
 @Composable
 private fun AddGarageButton(addGarage:() -> Unit){
     Row(modifier = Modifier
@@ -279,4 +291,5 @@ private fun AddGarageButton(addGarage:() -> Unit){
         }
     }
 }
+// [End, AddGarageButton]
 
