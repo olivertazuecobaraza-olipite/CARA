@@ -206,7 +206,7 @@ private fun LeftCard(car: Car,
                             .build()
                     )
                 } else {
-                    painterResource(id = car.image)
+                    painterResource(id = car.image.toInt())
                 }
 
                 Image(
@@ -254,7 +254,7 @@ private fun RightCard(car: Car,
                             .build()
                     )
                 } else {
-                    painterResource(id = car.image)
+                    painterResource(id = car.image.toInt())
                 }
 
                 Image(

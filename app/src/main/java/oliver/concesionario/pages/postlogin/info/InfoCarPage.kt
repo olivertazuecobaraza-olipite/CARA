@@ -37,6 +37,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.runtime.snapshots.toInt
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -47,14 +48,18 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import oliver.concesionario.model.Car
+import oliver.concesionario.viewmodels.postlogin.garageviewmodel.GarageViewModel
 
 // [Start, InfoCarScreen]
 @Composable
 fun InfoCarScreen(car: Car,
-                  goBack: () -> Unit){
+                  goBack: () -> Unit,
+                  garageViewModel: GarageViewModel){
     Scaffold(modifier = Modifier.fillMaxSize(),
         bottomBar = { // Set the bottom bar's Scaffold as a Button
-            AddGarageButton {goBack()}
+            AddGarageButton {
+                garageViewModel.addCar(car)
+            }
         },
         topBar = { // Set the topbar's Scaffold as a BackArrowButton
             BackArrow(goBack)
@@ -65,7 +70,7 @@ fun InfoCarScreen(car: Car,
                 .padding(paddingValues)
         ){
             // Image
-            CarImage(car.image)
+            CarImage(car.image.toInt())
 
             // Content
             InfoContent(car)

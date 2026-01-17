@@ -14,7 +14,9 @@ import com.google.firebase.firestore.firestore
 
 
 import oliver.concesionario.nav3.Navigation
+import oliver.concesionario.viewmodels.postlogin.garageviewmodel.GarageViewModel
 import oliver.concesionario.viewmodels.postlogin.homeviewmodel.HomeViewModel
+import oliver.concesionario.viewmodels.postlogin.infoviewmodel.InfoViewModel
 import oliver.concesionario.viewmodels.postlogin.profileviewmodel.ProfileViewModel
 import oliver.concesionario.viewmodels.prelogin.initviewmodel.InitViewModel
 import oliver.concesionario.viewmodels.prelogin.loginviewmodel.LoginViewModel
@@ -42,7 +44,9 @@ class MainActivity : ComponentActivity() {
                 LoginViewModel(auth),
                 RegisterViewModel(auth),
                 ProfileViewModel(auth),
-                HomeViewModel(db)
+                HomeViewModel(db, GarageViewModel()),
+                GarageViewModel(),
+                InfoViewModel(GarageViewModel())
             )
         }
     }

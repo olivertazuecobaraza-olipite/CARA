@@ -28,7 +28,9 @@ import oliver.concesionario.pages.postlogin.settings.SettingsScreen
 import oliver.concesionario.pages.prelogin.init.InitScreen
 import oliver.concesionario.pages.prelogin.login.LoginScreen
 import oliver.concesionario.pages.prelogin.register.RegisterScreen
+import oliver.concesionario.viewmodels.postlogin.garageviewmodel.GarageViewModel
 import oliver.concesionario.viewmodels.postlogin.homeviewmodel.HomeViewModel
+import oliver.concesionario.viewmodels.postlogin.infoviewmodel.InfoViewModel
 import oliver.concesionario.viewmodels.postlogin.profileviewmodel.ProfileViewModel
 import oliver.concesionario.viewmodels.prelogin.initviewmodel.InitViewModel
 import oliver.concesionario.viewmodels.prelogin.loginviewmodel.LoginViewModel
@@ -74,7 +76,9 @@ fun Navigation(
     loginViewModel: LoginViewModel,
     registerViewModel: RegisterViewModel,
     profileViewModel: ProfileViewModel,
-    homeViewModel: HomeViewModel
+    homeViewModel: HomeViewModel,
+    garageViewModel: GarageViewModel,
+    infoViewModel: InfoViewModel
 
     // [End, Params]
 ){
@@ -160,7 +164,7 @@ fun Navigation(
                     // [Start, GarageScreen]
                     is GarageScreenO -> NavEntry(key){
                         GarageScreen(
-                            listCars = listOf(), // List of cars in owner Garage
+                            garageViewModel = garageViewModel, // Viewodels
                             navToDetailCar = { car -> // Param by the car clicked
                                 navTo(InfoCarScreenC(car)) } // Add new Screen to the top(InfoCarScreen)
                         )
@@ -192,7 +196,8 @@ fun Navigation(
                     is InfoCarScreenC -> NavEntry(key) {
                         InfoCarScreen(
                             car = key.car,// Set Param Car's clicked
-                            goBack = { navBack() } // Delete Last/current Screen from the stack, so the previous is the new CurrentScreen
+                            goBack = { navBack() }, // Delete Last/current Screen from the stack, so the previous is the new CurrentScreen
+                            garageViewModel = garageViewModel
                         )
                     }
                     // [End, InfoCarScreen]

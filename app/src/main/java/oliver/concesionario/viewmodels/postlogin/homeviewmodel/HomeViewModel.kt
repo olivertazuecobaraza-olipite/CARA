@@ -1,18 +1,25 @@
 package oliver.concesionario.viewmodels.postlogin.homeviewmodel
 
-import android.util.Log
-import androidx.compose.ui.graphics.painter.Painter
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
+import kotlinx.coroutines.withContext
 import oliver.concesionario.db
 import oliver.concesionario.model.Car
+import oliver.concesionario.viewmodels.postlogin.garageviewmodel.GarageViewModel
 
-class HomeViewModel(db: FirebaseFirestore) {
+class HomeViewModel(db: FirebaseFirestore,
+                    val garageViewModel: GarageViewModel) : ViewModel(){
 
     // [Start when initialize viewmodel]
     init {
-        GetAllCarConcesionario()
+        getCars()
+        //addcars()
     }
     // [End when initialize viewmodel
 
@@ -37,19 +44,31 @@ class HomeViewModel(db: FirebaseFirestore) {
     var CarList: LiveData<List<Car>> = _carList
 
     // Get Cars from concesionaro method
-    private fun GetAllCarConcesionario(){
+    private suspend fun GetAllCarConcesionario(): List<Car>{
+        return try {
+            val snapshot = db.collection("concesionario").get().await()
+            // toObjects -> Generate a list automatically
+            snapshot.toObjects(Car::class.java)
+        } catch (e: Exception) {
+            emptyList()
+        }
+    }
+    // [End find Cars]
 
-        db.collection("concesionario").get()
-            .addOnSuccessListener { result ->
-                _carList.value = result.toObjects(Car::class.java)
+    private fun getCars(){
+        viewModelScope.launch {
+            val resutl : List<Car> = withContext(Dispatchers.IO){
+                GetAllCarConcesionario()
             }
-            .addOnFailureListener {
-                print("Cannot get the cars from the database")
-            }
-
+            _carList.value = resutl
+        }
     }
 
-
-    // [End find Cars]
+    // Method to do a test
+    private fun addcars(){
+        db.collection("concesionario").add(
+            Car(name = "Prueba", type = "Prueba", price = "123$")
+        )
+    }
 
 }

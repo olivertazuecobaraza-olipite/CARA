@@ -23,6 +23,8 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -31,16 +33,22 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import oliver.concesionario.R
 import oliver.concesionario.model.Car
+import oliver.concesionario.viewmodels.postlogin.garageviewmodel.GarageViewModel
 
 private lateinit var carSelected: Car
+
 // [Start, GarageScreen, Set public method GarageScreen, is a global screen]
 @Composable
-fun GarageScreen(listCars: List<Car> = listOf(),
+fun GarageScreen(garageViewModel: GarageViewModel,
                  navToDetailCar: (Car) -> Unit = {}){
-    if (listCars.isNotEmpty()) {
-        carSelected = listCars[0]
-        CompleteScreen(listCars, navToDetailCar)
+
+    val garage by garageViewModel.Cars.collectAsState()
+
+    if (garage.isNotEmpty()) {
+        carSelected = garage[0]
+        CompleteScreen(garage, navToDetailCar)
     } else {
         EmptyScreen()
     }
@@ -53,7 +61,7 @@ private fun CompleteScreen(listCars: List<Car>, navToDetailCar: (Car) -> Unit){
     Scaffold(modifier = Modifier.fillMaxSize()) { paddingValues ->
         Box(modifier = Modifier.fillMaxSize().padding(paddingValues)) {
             // Image
-            CarImage(listCars[0].image)
+            CarImage(listCars[0].image.toInt())
             // Content
             ContentCars(listCars, navToDetailCar)
         }
@@ -79,12 +87,25 @@ private fun EmptyScreen(){
 // other car to see Info when he back the image would be the last car selected
 @Composable
 private fun CarImage(image: Int){
-    Image(painter = painterResource(image),
+    val resToLoad = if (image != 0) image else R.drawable.ic_logo_cara
+
+    Image(
+        painter = painterResource(id = resToLoad),
+        contentDescription = "Car image",
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(400.dp),
+        contentScale = ContentScale.Crop
+    )
+/*
+Image(painter = painterResource(image),
         contentDescription = null,
         modifier = Modifier
             .fillMaxWidth()
             .height(400.dp),
         contentScale = ContentScale.Crop)
+ */
+
 }
 // [End, CarImage]
 
@@ -147,7 +168,7 @@ private fun CardCar(car: Car, navToDetailCar: (Car) -> Unit){
             )
             {
                 Image(
-                    painter = painterResource(id = car.image),
+                    painter = painterResource(id = car.image.toInt()),
                     contentDescription = null,
                     modifier = Modifier.fillMaxSize(),
                     contentScale = ContentScale.Fit
